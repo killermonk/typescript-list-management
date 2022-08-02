@@ -6,7 +6,7 @@ import "./defaultLayout.scss";
 
 const DefaultLayout : React.FunctionComponent<LayoutProps> = (props: LayoutProps) => {
     return (
-        <div className="body">
+        <div className="body bg-light">
             <Header/>
             <main role="main">
                 { props.children }

@@ -4,3 +4,23 @@ main[role=main]  {
     flex-direction: column;
     justify-content: space-between;
 }
+
+.float-right {
+    float: right !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.flex-small {
+    flex-grow: 0 !important;
+}
+
+.vertical-center {
+    align-self: center !important;
+}
+
+.strike {
+    text-decoration: line-through !important;
+}

@@ -74,6 +74,7 @@ module.exports = {
 		extensions: ['.tsx', '.ts', '.js'],
 		alias: {
 			"@components": path.resolve(__dirname, "src/components"),
+			"@models": path.resolve(__dirname, "src/models"),
 			"@constants": path.resolve(__dirname, "src/constants"),
 			"@enums": path.resolve(__dirname, "src/constants/enums"),
 			"@pages": path.resolve(__dirname, "src/pages"),

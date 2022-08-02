@@ -8,8 +8,8 @@ const Menu = () => {
         <Container>
             <Navbar.Brand href="/"></Navbar.Brand>
             <Nav className="me-auto">
-                { DefaultMenuConst.map((item) => (
-                    <Nav.Link href={item.link}>
+                { DefaultMenuConst.map((item, idx) => (
+                    <Nav.Link key={idx} href={item.link}>
                         {item.title}
                     </Nav.Link>
                 )) }
