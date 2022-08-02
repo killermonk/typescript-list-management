@@ -21,7 +21,7 @@ class TodoModel {
             done: false,
         };
 
-        storage.append(TODO_KEY, item);
+        storage.prepend(TODO_KEY, item);
 
         return item;
     }

@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Container, Row, Form, Button, Col, Stack } from "react-bootstrap";
-import * as debounce from "lodash.debounce";
 import DefaultLayout from "@components/layout/defaultLayout";
 import TodoModel, { TodoItem } from "@models/todoModel";
 import { TodoCard } from "@components/todos/todoCard";
@@ -16,19 +15,13 @@ export default () => {
 
   // Message Handling
   const [ message, setMessage ] = React.useState('');
-  // Debounced change handler so we only re-render after they stop input for a time
-  const onMessageChange = React.useMemo(
-    () => debounce((e: ChangeEvent) => {
-        const nextMessage = e.target.value;
-        if (message !== nextMessage) {
-          console.log('updating message value', message?.length, nextMessage?.length);
-          setMessage(nextMessage);
-        }
-      }, 250),
-    [message, setMessage]);
-  // Cleanup debounce handler on unmount
-  React.useEffect(() => () => onMessageChange.cancel(), []);
-
+  // Handler so we can keep track of the message
+  const onMessageChange = React.useCallback((e: ChangeEvent) => {
+    const nextMessage = e.target.value;
+    if (message !== nextMessage) {
+      setMessage(nextMessage);
+    }
+  }, [message, setMessage]);
 
   // Add/Remove TODO Items
   const onAddNewItem = React.useCallback((e: ClickEvent | FormEvent) => {
@@ -43,7 +36,7 @@ export default () => {
   const onRemoveFirst = React.useCallback((e: ClickEvent) => {
     e.preventDefault();
     if (todos.length > 0) {
-      TodoModel.delete(todos[0].id);
+      TodoModel.delete(todos[todos.length - 1].id);
     }
   }, [todos]);
 
@@ -59,7 +52,7 @@ export default () => {
               <Col>
                 <Form.Group controlId="todoForm.message">
                   <Form.Label>Add Todo</Form.Label>
-                  <Form.Control type="text" placeholder="Add new todo" autoComplete="off" onChange={onMessageChange} />
+                  <Form.Control type="text" placeholder="Add new todo" autoComplete="off" value={message} onChange={onMessageChange} />
                 </Form.Group>
               </Col>
             </Row>

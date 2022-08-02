@@ -18,6 +18,13 @@ class Storage {
         this._notify(key, value);
     }
 
+    prepend<T>(key: string, value: T): void {
+        const existing: T[] = this.get(key) || [];
+        existing.unshift(value);
+
+        this.put(key, existing);
+    }
+
     append<T>(key: string, value: T): void {
         const existing: T[] = this.get(key) || [];
         existing.push(value);
